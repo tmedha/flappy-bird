@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Flappy Bird</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div id="game-container">
+  <canvas id="game-canvas" width="288" height="512"></canvas>
+
+  <div id="hud" class="hidden">
+    <span id="score-display">0</span>
+  </div>
+
+  <div id="screen-menu" class="screen">
+    <h1>Flappy Bird</h1>
+    <button class="btn btn-primary" id="menu-play-btn">Play</button>
+  </div>
+
+  <div id="screen-character-select" class="screen hidden">
+    <h2>Choose your character</h2>
+    <div class="character-grid">
+      <button class="character-option" data-character="bird">
+        <canvas class="preview-canvas" data-character="bird" width="64" height="64"></canvas>
+        <span>Bird</span>
+      </button>
+      <button class="character-option" data-character="penguin">
+        <canvas class="preview-canvas" data-character="penguin" width="64" height="64"></canvas>
+        <span>Penguin</span>
+      </button>
+      <button class="character-option" data-character="dino">
+        <canvas class="preview-canvas" data-character="dino" width="64" height="64"></canvas>
+        <span>Dino</span>
+      </button>
+    </div>
+    <button class="btn btn-secondary" id="character-back-btn">Back</button>
+  </div>
+
+  <div id="screen-mode-select" class="screen hidden">
+    <h2>Choose a mode</h2>
+    <button class="btn btn-primary" id="mode-limited-btn">Limited &mdash; Levels</button>
+    <button class="btn btn-primary" id="mode-endless-btn">Endless</button>
+    <button class="btn btn-secondary" id="mode-back-btn">Back</button>
+  </div>
+
+  <div id="screen-level-select" class="screen hidden">
+    <h2 id="level-select-title">Level 1</h2>
+    <p id="level-select-info"></p>
+    <button class="btn btn-primary" id="level-start-btn">Start</button>
+    <button class="btn btn-secondary" id="level-back-btn">Back</button>
+  </div>
+
+  <div id="screen-level-complete" class="screen hidden">
+    <h2>Level Complete!</h2>
+    <p id="level-complete-info"></p>
+    <button class="btn btn-primary" id="level-complete-next-btn">Next Level</button>
+  </div>
+
+  <div id="screen-win" class="screen hidden">
+    <h2>You Win!</h2>
+    <p id="win-info"></p>
+    <button class="btn btn-primary" id="win-menu-btn">Main Menu</button>
+  </div>
+
+  <div id="screen-game-over" class="screen hidden">
+    <h2>Game Over</h2>
+    <p id="game-over-info"></p>
+    <button class="btn btn-primary" id="game-over-restart-btn">Play Again</button>
+    <button class="btn btn-secondary" id="game-over-menu-btn">Main Menu</button>
+  </div>
+</div>
+
+<script src="src/config.js"></script>
+<script src="src/palette.js"></script>
+<script src="src/spriteBuilder.js"></script>
+<script src="src/sprites.js"></script>
+<script src="src/pixelRenderer.js"></script>
+<script src="src/input.js"></script>
+<script src="src/collision.js"></script>
+<script src="src/entities/bird.js"></script>
+<script src="src/entities/trunk.js"></script>
+<script src="src/entities/ground.js"></script>
+<script src="src/obstacleManager.js"></script>
+<script src="src/difficulty.js"></script>
+<script src="src/scoreboard.js"></script>
+<script src="src/stateMachine.js"></script>
+<script src="src/screens/menuScreen.js"></script>
+<script src="src/screens/characterSelectScreen.js"></script>
+<script src="src/screens/modeSelectScreen.js"></script>
+<script src="src/screens/levelSelectScreen.js"></script>
+<script src="src/screens/playingScreen.js"></script>
+<script src="src/screens/levelCompleteScreen.js"></script>
+<script src="src/screens/gameOverScreen.js"></script>
+<script src="src/screens/winScreen.js"></script>
+<script src="src/game.js"></script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background: #1a1a2e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Courier New', monospace;
+  color: #fff;
+}
+
+#game-container {
+  position: relative;
+  width: 288px;
+  height: 512px;
+  box-shadow: 0 0 0 4px #000, 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+#game-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 288px;
+  height: 512px;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  background: #70c5ce;
+}
+
+#hud {
+  position: absolute;
+  top: 16px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  text-shadow: 2px 2px 0 #000;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 24px;
+  text-align: center;
+  background: rgba(10, 10, 20, 0.72);
+  z-index: 10;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.screen h1 {
+  font-size: 30px;
+  margin: 0 0 8px;
+  text-shadow: 2px 2px 0 #000;
+}
+
+.screen h2 {
+  font-size: 20px;
+  margin: 0 0 8px;
+  text-shadow: 2px 2px 0 #000;
+}
+
+.screen p {
+  font-size: 14px;
+  margin: 0 0 8px;
+  line-height: 1.5;
+}
+
+.btn {
+  font-family: inherit;
+  font-size: 15px;
+  padding: 10px 22px;
+  border-radius: 4px;
+  border: 3px solid #000;
+  cursor: pointer;
+  min-width: 160px;
+}
+
+.btn-primary {
+  background: #f2994a;
+  color: #2b1a00;
+  font-weight: bold;
+}
+
+.btn-primary:hover {
+  background: #ffb066;
+}
+
+.btn-secondary {
+  background: #4a4a6a;
+  color: #fff;
+}
+
+.btn-secondary:hover {
+  background: #5c5c84;
+}
+
+.character-grid {
+  display: flex;
+  gap: 12px;
+}
+
+.character-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: #2b2b45;
+  border: 3px solid #000;
+  border-radius: 6px;
+  padding: 8px;
+  cursor: pointer;
+  color: #fff;
+  font-family: inherit;
+  font-size: 12px;
+}
+
+.character-option:hover,
+.character-option.selected {
+  background: #4a4a7a;
+  border-color: #f2994a;
+}
+
+.preview-canvas {
+  width: 64px;
+  height: 64px;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  background: #70c5ce;
+}
