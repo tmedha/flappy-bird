@@ -91,6 +91,25 @@ Game.SPRITES = (function () {
     return g;
   }
 
+  function buildMoon() {
+    const g = SB.makeGrid(14, 14);
+    SB.fillEllipse(g, 7, 7, 6.5, 6.5, 1);
+    SB.fillEllipse(g, 5, 5, 1.6, 1.6, 2);
+    SB.fillEllipse(g, 9.5, 8.5, 1.3, 1.3, 2);
+    SB.fillEllipse(g, 6, 10, 1, 1, 2);
+    return g;
+  }
+
+  function buildStar() {
+    const g = SB.makeGrid(3, 3);
+    SB.setPixel(g, 1, 0, 1);
+    SB.setPixel(g, 0, 1, 1);
+    SB.setPixel(g, 1, 1, 1);
+    SB.setPixel(g, 2, 1, 1);
+    SB.setPixel(g, 1, 2, 1);
+    return g;
+  }
+
   function buildGroundTile() {
     const w = 8;
     const h = 14;
@@ -136,6 +155,14 @@ Game.SPRITES = (function () {
     cloud: {
       palette: { 1: C.cloud.fill },
       grid: buildCloud(),
+    },
+    moon: {
+      palette: { 1: C.sky.moon, 2: C.sky.moonShadow },
+      grid: buildMoon(),
+    },
+    star: {
+      palette: { 1: C.sky.star },
+      grid: buildStar(),
     },
   };
 })();

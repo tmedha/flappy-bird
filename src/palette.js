@@ -47,4 +47,9 @@ Game.COLORS = {
   cloud: {
     fill: '#ffffff',
   },
+  sky: {
+    moon: '#f5f0d0',
+    moonShadow: '#d9d2a3',
+    star: '#ffffff',
+  },
 };

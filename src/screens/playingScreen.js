@@ -11,6 +11,7 @@ Game.StateMachine.register('PLAYING', {
     this.bird = new Game.Bird(Game.Session.character);
     this.ground = new Game.Ground();
     this.clouds = new Game.Clouds();
+    this.nightSky = new Game.NightSky();
     this.scoreboard = new Game.Scoreboard();
     this.gameOver = false;
     this.paused = false;
@@ -79,6 +80,7 @@ Game.StateMachine.register('PLAYING', {
     this.bird.update(dt);
     this.ground.update(dt, this.speed);
     this.clouds.update(dt);
+    this.nightSky.update(dt);
     this.obstacles.update(dt, CONFIG.CANVAS_WIDTH, CONFIG.CANVAS_HEIGHT, CONFIG.GROUND_HEIGHT);
 
     const scored = this.obstacles.checkScored(this.bird.x);
@@ -113,8 +115,14 @@ Game.StateMachine.register('PLAYING', {
 
   render(ctx) {
     const CONFIG = Game.CONFIG;
-    ctx.fillStyle = Game.Session.mode === 'endless' ? Game.DayNightCycle.getSkyColor(this.elapsedSeconds) : CONFIG.SKY_COLOR;
+    const isEndless = Game.Session.mode === 'endless';
+    // Obstacle-lengths of scroll passed so far, used in place of wall-clock
+    // time so the day/night cycle is paced by obstacles rather than seconds.
+    const obstacleProgress = this.obstacles.scrollDistance / CONFIG.SPAWN_SPACING;
+
+    ctx.fillStyle = isEndless ? Game.DayNightCycle.getSkyColor(obstacleProgress) : CONFIG.SKY_COLOR;
     ctx.fillRect(0, 0, CONFIG.CANVAS_WIDTH, CONFIG.CANVAS_HEIGHT);
+    if (isEndless) this.nightSky.draw(ctx, Game.DayNightCycle.getNightAmount(obstacleProgress));
     this.clouds.draw(ctx);
     this.obstacles.draw(ctx, CONFIG.CANVAS_HEIGHT, CONFIG.GROUND_HEIGHT);
     this.ground.draw(ctx);

@@ -1,37 +1,40 @@
 window.Game = window.Game || {};
 
-// Endless-mode-only decorative sky cycle: day -> sunset -> night -> day,
-// repeating every CYCLE_SECONDS. Colors are linearly interpolated between
-// whichever pair of keyframes the current time falls between.
+// Endless-mode-only decorative sky cycle: day -> sunsetting evening -> night
+// -> day, keyed off obstacles passed (via ObstacleManager's scroll distance)
+// rather than wall-clock time. Every CYCLE_OBSTACLES "obstacle-lengths" of
+// scroll: DAY_OBSTACLES of plain day sky, then EVENING_OBSTACLES gradually
+// sunsetting into night, then NIGHT_OBSTACLES of full night (moon + stars),
+// then it snaps back to day and repeats.
 Game.DayNightCycle = (function () {
-  const CYCLE_SECONDS = 420; // 7 min: 2 min day, 1 min sunset, 4 min night
+  const DAY_OBSTACLES = 12;
+  const EVENING_OBSTACLES = 10;
+  const NIGHT_OBSTACLES = 12;
+  const CYCLE_OBSTACLES = DAY_OBSTACLES + EVENING_OBSTACLES + NIGHT_OBSTACLES;
 
   const DAY = '#70c5ce';
   const SUNSET = '#e8794f';
   const NIGHT = '#1b2440';
 
-  const KEYFRAMES = [
-    [0, DAY],
-    [110, DAY],
-    [120, SUNSET],
-    [170, SUNSET],
-    [180, NIGHT],
-    [410, NIGHT],
-    [420, DAY],
-  ];
-
-  function getSkyColor(elapsedSeconds) {
-    const t = elapsedSeconds % CYCLE_SECONDS;
-    for (let i = 0; i < KEYFRAMES.length - 1; i++) {
-      const [t0, c0] = KEYFRAMES[i];
-      const [t1, c1] = KEYFRAMES[i + 1];
-      if (t >= t0 && t <= t1) {
-        const localT = t1 === t0 ? 0 : (t - t0) / (t1 - t0);
-        return Game.lerpColor(c0, c1, localT);
-      }
-    }
-    return DAY;
+  // 0 (full day) .. 1 (full night), ramping up gradually through the evening.
+  function getNightAmount(obstacleProgress) {
+    const t = obstacleProgress % CYCLE_OBSTACLES;
+    if (t < DAY_OBSTACLES) return 0;
+    if (t < DAY_OBSTACLES + EVENING_OBSTACLES) return (t - DAY_OBSTACLES) / EVENING_OBSTACLES;
+    return 1;
   }
 
-  return { getSkyColor, CYCLE_SECONDS };
+  function getSkyColor(obstacleProgress) {
+    const t = obstacleProgress % CYCLE_OBSTACLES;
+    if (t < DAY_OBSTACLES) return DAY;
+    if (t < DAY_OBSTACLES + EVENING_OBSTACLES) {
+      const localT = (t - DAY_OBSTACLES) / EVENING_OBSTACLES;
+      return localT < 0.5
+        ? Game.lerpColor(DAY, SUNSET, localT / 0.5)
+        : Game.lerpColor(SUNSET, NIGHT, (localT - 0.5) / 0.5);
+    }
+    return NIGHT;
+  }
+
+  return { getSkyColor, getNightAmount, CYCLE_OBSTACLES };
 })();
