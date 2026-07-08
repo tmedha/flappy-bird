@@ -42,9 +42,9 @@ Game.SPRITES = (function () {
     SB.outlinedEllipse(g, 8, 9.5, 6, 5.5, 1, 2);
     SB.fillEllipse(g, 8, 11.5, 3.5, 2.5, 3);
     // back spikes
-    SB.fillTriangle(g, 4, 5, 5.5, 5, 4.75, 2.5, 4);
-    SB.fillTriangle(g, 6.5, 4.5, 8, 4.5, 7.25, 2, 4);
-    SB.fillTriangle(g, 9, 5, 10.5, 5, 9.75, 2.5, 4);
+    SB.fillTriangle(g, 3, 6.5, 5.8, 6.5, 4.4, 1, 4);
+    SB.fillTriangle(g, 6, 6, 9, 6, 7.5, 0.2, 4);
+    SB.fillTriangle(g, 9.2, 6.5, 12, 6.5, 10.6, 1, 4);
     // legs / arm, shifts between frames for a running animation
     SB.fillRect(g, 4, 14, 2, 2, 1);
     SB.fillRect(g, 9, wingUpLegOffset(frameUp), 2, 2, 1);

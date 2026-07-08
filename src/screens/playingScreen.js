@@ -27,14 +27,19 @@ Game.StateMachine.register('PLAYING', {
 
     setScoreDisplay(0);
     Game.Input.onFlap(() => {
-      if (!this.paused) this.bird.flap();
+      // Space bar flaps normally, but resumes instead if the game is paused.
+      if (this.paused) {
+        this.setPaused(false);
+      } else {
+        this.bird.flap();
+      }
     });
 
     this.onPauseBtn = () => this.togglePause();
     this.onResumeBtn = () => this.setPaused(false);
     this.onPausedMenuBtn = () => Game.StateMachine.changeState('MENU');
     this.onKeydown = (e) => {
-      if (e.code === 'KeyP' || e.code === 'Escape') this.togglePause();
+      if (e.code === 'KeyB' || e.code === 'KeyP' || e.code === 'Escape') this.togglePause();
     };
     document.getElementById('pause-btn').onclick = this.onPauseBtn;
     document.getElementById('resume-btn').onclick = this.onResumeBtn;

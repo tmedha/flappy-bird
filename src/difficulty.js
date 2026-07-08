@@ -5,13 +5,13 @@ window.Game = window.Game || {};
 Game.Difficulty = (function () {
   const LEVEL_COUNT = 6;
   const BASE_GAP = 213;
-  const GAP_STEP = 15;
-  const MIN_GAP = 125;
+  const GAP_STEP = 25;
+  const MIN_GAP = 110;
   const BASE_SPEED = 175;
-  const SPEED_GROWTH = 0.15;
-  const MAX_SPEED = 400;
+  const SPEED_GROWTH = 0.3;
+  const MAX_SPEED = 500;
   const BASE_TARGET = 8;
-  const TARGET_STEP = 2;
+  const TARGET_STEP = 3;
 
   const LEVELS = Array.from({ length: LEVEL_COUNT }, (_, i) => {
     const n = i + 1;
