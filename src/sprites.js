@@ -71,14 +71,23 @@ Game.SPRITES = (function () {
     return g;
   }
 
-  function buildTrunkCap() {
-    const w = 15;
-    const h = 6;
+  function buildTrunkLeaves() {
+    const w = 17;
+    const h = 9;
     const g = SB.makeGrid(w, h);
-    SB.fillRect(g, 0, 0, w, h, 1);
-    SB.fillEllipse(g, 7, 2.5, 6.5, 2.3, 2);
-    SB.fillEllipse(g, 7, 2.5, 4.5, 1.6, 3);
-    SB.fillEllipse(g, 7, 2.5, 2, 0.9, 4);
+    SB.fillEllipse(g, 8, 5, 8, 4.2, 1);
+    SB.fillEllipse(g, 8, 5, 7, 3.4, 2);
+    SB.fillEllipse(g, 5.5, 3.5, 3, 2.2, 3);
+    SB.fillEllipse(g, 11, 4, 3.2, 2.4, 3);
+    SB.fillEllipse(g, 8, 2.5, 2.6, 1.8, 4);
+    return g;
+  }
+
+  function buildCloud() {
+    const g = SB.makeGrid(16, 8);
+    SB.fillEllipse(g, 5, 5, 4, 3, 1);
+    SB.fillEllipse(g, 9, 4, 5, 3.5, 1);
+    SB.fillEllipse(g, 12, 5.5, 3, 2.5, 1);
     return g;
   }
 
@@ -116,13 +125,17 @@ Game.SPRITES = (function () {
       palette: { 1: C.trunk.outline, 2: C.trunk.bark, 3: C.trunk.barkDark, 4: C.trunk.barkLight },
       grid: buildTrunkSegment(),
     },
-    trunkCap: {
-      palette: { 1: C.trunk.outline, 2: C.trunk.cap, 3: C.trunk.barkLight, 4: C.trunk.barkDark },
-      grid: buildTrunkCap(),
+    trunkLeaves: {
+      palette: { 1: C.leaves.outline, 2: C.leaves.dark, 3: C.leaves.mid, 4: C.leaves.light },
+      grid: buildTrunkLeaves(),
     },
     ground: {
       palette: { 1: C.ground.grassDark, 2: C.ground.grass, 3: C.ground.dirt, 4: C.ground.dirtDark },
       grid: buildGroundTile(),
+    },
+    cloud: {
+      palette: { 1: C.cloud.fill },
+      grid: buildCloud(),
     },
   };
 })();

@@ -31,12 +31,20 @@ Game.COLORS = {
     bark: '#8a5a2a',
     barkDark: '#6d4520',
     barkLight: '#a3733d',
-    cap: '#5a3a1a',
+  },
+  leaves: {
+    outline: '#204020',
+    dark: '#2e7d32',
+    mid: '#4caf50',
+    light: '#7ec850',
   },
   ground: {
     grass: '#7ec850',
     grassDark: '#5da53a',
     dirt: '#ded895',
     dirtDark: '#c9c073',
+  },
+  cloud: {
+    fill: '#ffffff',
   },
 };

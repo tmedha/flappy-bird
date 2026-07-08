@@ -25,12 +25,12 @@ Game.Input = (function () {
   });
 
   document.addEventListener('mousedown', (e) => {
-    if (e.target.closest('.screen')) return;
+    if (e.target.closest('.screen') || e.target.closest('button')) return;
     trigger(e);
   });
 
   document.addEventListener('touchstart', (e) => {
-    if (e.target.closest('.screen')) return;
+    if (e.target.closest('.screen') || e.target.closest('button')) return;
     trigger(e);
   }, { passive: false });
 

@@ -3,13 +3,13 @@ window.Game = window.Game || {};
 // Limited-mode level table, generated from base constants so difficulty
 // is easy to tune from one place rather than hand-authored per level.
 Game.Difficulty = (function () {
-  const LEVEL_COUNT = 5;
-  const BASE_GAP = 170;
-  const GAP_STEP = 12;
-  const MIN_GAP = 100;
-  const BASE_SPEED = 140;
+  const LEVEL_COUNT = 6;
+  const BASE_GAP = 213;
+  const GAP_STEP = 15;
+  const MIN_GAP = 125;
+  const BASE_SPEED = 175;
   const SPEED_GROWTH = 0.15;
-  const MAX_SPEED = 320;
+  const MAX_SPEED = 400;
   const BASE_TARGET = 8;
   const TARGET_STEP = 2;
 
@@ -27,5 +27,22 @@ Game.Difficulty = (function () {
     return LEVELS[n - 1];
   }
 
-  return { LEVELS, LEVEL_COUNT, getLevel };
+  // Endless mode has no discrete levels — instead speed/gap ramp
+  // continuously with elapsed play time, reaching max difficulty after
+  // ENDLESS_RAMP_SECONDS and holding there.
+  const ENDLESS_RAMP_SECONDS = 300; // 5 minutes to reach max difficulty
+  const ENDLESS_MAX_SPEED = MAX_SPEED;
+  const ENDLESS_MIN_GAP = MIN_GAP;
+
+  function getEndlessDifficulty(elapsedSeconds) {
+    const ramp = Math.min(1, elapsedSeconds / ENDLESS_RAMP_SECONDS);
+    const baseSpeed = Game.CONFIG.ENDLESS_SPEED;
+    const baseGap = Game.CONFIG.ENDLESS_GAP_HEIGHT;
+    return {
+      speed: baseSpeed + ramp * (ENDLESS_MAX_SPEED - baseSpeed),
+      gapHeight: baseGap - ramp * (baseGap - ENDLESS_MIN_GAP),
+    };
+  }
+
+  return { LEVELS, LEVEL_COUNT, getLevel, getEndlessDifficulty };
 })();

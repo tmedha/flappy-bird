@@ -7,10 +7,18 @@
 </head>
 <body>
 <div id="game-container">
-  <canvas id="game-canvas" width="288" height="512"></canvas>
+  <canvas id="game-canvas" width="360" height="640"></canvas>
+
+  <button id="pause-btn" class="hidden" aria-label="Pause">&#10074;&#10074;</button>
 
   <div id="hud" class="hidden">
     <span id="score-display">0</span>
+  </div>
+
+  <div id="screen-paused" class="screen hidden">
+    <h2>Paused</h2>
+    <button class="btn btn-primary" id="resume-btn">Resume</button>
+    <button class="btn btn-secondary" id="paused-menu-btn">Main Menu</button>
   </div>
 
   <div id="screen-menu" class="screen">
@@ -39,14 +47,14 @@
 
   <div id="screen-mode-select" class="screen hidden">
     <h2>Choose a mode</h2>
-    <button class="btn btn-primary" id="mode-limited-btn">Limited &mdash; Levels</button>
+    <button class="btn btn-primary" id="mode-limited-btn">Levels</button>
     <button class="btn btn-primary" id="mode-endless-btn">Endless</button>
     <button class="btn btn-secondary" id="mode-back-btn">Back</button>
   </div>
 
   <div id="screen-level-select" class="screen hidden">
     <h2 id="level-select-title">Level 1</h2>
-    <p id="level-select-info"></p>
+    <p id="level-select-info">Get ready to fly!</p>
     <button class="btn btn-primary" id="level-start-btn">Start</button>
     <button class="btn btn-secondary" id="level-back-btn">Back</button>
   </div>
@@ -81,8 +89,11 @@
 <script src="src/entities/bird.js"></script>
 <script src="src/entities/trunk.js"></script>
 <script src="src/entities/ground.js"></script>
+<script src="src/entities/clouds.js"></script>
 <script src="src/obstacleManager.js"></script>
+<script src="src/colorUtils.js"></script>
 <script src="src/difficulty.js"></script>
+<script src="src/dayNightCycle.js"></script>
 <script src="src/scoreboard.js"></script>
 <script src="src/stateMachine.js"></script>
 <script src="src/screens/menuScreen.js"></script>

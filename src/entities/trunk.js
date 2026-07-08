@@ -28,15 +28,17 @@ Game.Trunk.prototype.getRects = function (canvasHeight, groundHeight) {
 Game.Trunk.prototype.draw = function (ctx, canvasHeight, groundHeight) {
   const rects = this.getRects(canvasHeight, groundHeight);
   const segment = Game.SPRITES.trunkSegment;
-  const cap = Game.SPRITES.trunkCap;
+  const leaves = Game.SPRITES.trunkLeaves;
   const pixelSize = Game.CONFIG.PIXEL_SIZE;
   const segH = segment.grid.length * pixelSize;
-  const capH = cap.grid.length * pixelSize;
+  const leavesH = leaves.grid.length * pixelSize;
+  // Leaves are wider than the trunk segment; center them over it.
+  const leavesOffsetX = ((leaves.grid[0].length - segment.grid[0].length) / 2) * pixelSize;
 
   drawTiledColumn(rects.top, true);
   drawTiledColumn(rects.bottom, false);
 
-  function drawTiledColumn(rect, capAtBottom) {
+  function drawTiledColumn(rect, leavesAtBottom) {
     if (rect.h <= 0) return;
     // Clip so segment tiles (a fixed size that rarely divides rect.h evenly)
     // never bleed past the trunk's bounds into the gap.
@@ -49,7 +51,7 @@ Game.Trunk.prototype.draw = function (ctx, canvasHeight, groundHeight) {
     }
     ctx.restore();
 
-    const capY = capAtBottom ? rect.y + rect.h - capH : rect.y;
-    Game.drawSprite(ctx, cap.grid, cap.palette, rect.x - pixelSize, capY, pixelSize, 0);
+    const leavesY = leavesAtBottom ? rect.y + rect.h - leavesH : rect.y;
+    Game.drawSprite(ctx, leaves.grid, leaves.palette, rect.x - leavesOffsetX, leavesY, pixelSize, 0);
   }
 };
